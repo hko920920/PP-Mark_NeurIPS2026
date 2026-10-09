@@ -24,7 +24,7 @@ def main() -> None:
         default="outputs/rebuttal_quality_ppmark_full1000_corrected",
     )
     parser.add_argument("--device", default="cuda")
-    parser.add_argument("--methods-file", type=Path, help="JSON method list with portable manifest paths")
+    parser.add_argument("--methods-file", type=Path, required=True, help="JSON method list with portable manifest paths")
     parser.add_argument("--batch-size", type=int, default=16)
     parser.add_argument("--bootstrap-draws", type=int, default=10000)
     parser.add_argument("--seed", type=int, default=20260725)

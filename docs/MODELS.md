@@ -19,16 +19,13 @@ the model host, and use the same checkpoint and configuration for generation and
 recovery. A local model directory can also be supplied through `--model-id` and
 the corresponding verifier configuration.
 
-The preserved experiment records do not establish an exact historical revision
-for every external model. Current downloads therefore should not be described
-as byte-identical reconstructions of all historical images.
+Record the model revision and software environment with each evaluation run.
 
 ## Comparison methods
 
-Generate comparison images using the respective official implementation and
-the provided prompt/seed pairs, then supply their paths through
-`data/quality_methods.json`. PP-Mark's evaluation code consumes images and does
-not require vendoring all baseline repositories into this checkout.
+Generate comparison images using the respective official implementation with
+the same prompt/seed pairs across methods. Supply their paths through the
+manifest format in the [evaluation guide](REPRODUCE.md).
 
 - [Tree-Ring](https://github.com/YuxinWenRick/tree-ring-watermark)
 - [Gaussian Shading](https://github.com/bsmhmmlf/Gaussian-Shading)
@@ -36,7 +33,5 @@ not require vendoring all baseline repositories into this checkout.
 - [Stable Signature / HiDDeN components](https://github.com/facebookresearch/stable_signature)
 - [TrustMark](https://github.com/adobe/trustmark)
 
-Use the baseline's own model setup and license. The recorded quality table also
-contains InvisMark and WIND; their images can be supplied through the same
-manifest interface. The reference tables preserve historical measurements and
-do not imply that a baseline was rerun during release preparation.
+Use each baseline's own model setup and license. Images from additional methods
+can be supplied through the same manifest interface.

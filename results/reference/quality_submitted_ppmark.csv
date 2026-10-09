@@ -1,2 +1,0 @@
-method,label,brisque_n,brisque_design,brisque_mean,brisque_p95,kid_n,kid_subset_size,kid_splits,kid_mean,kid_std,kid_x1000_mean,kid_x1000_std,source
-pp_mark,PP-Mark (submitted),100,25 prompts x 4 seeds,9.924519,34.144476,1000,500,20,0.001101357399,0.000202021377,1.101,0.202,submitted_manuscript_and_saved_evaluation

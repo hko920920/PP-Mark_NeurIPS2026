@@ -29,12 +29,9 @@ checkpoints/
 *.onnx
 *.npy
 *.npz
-data/quality_inputs/*/images/
-data/quality_inputs/*/metadata/
-data/quality_1000/*/images/
-data/sequential/img_*/
-data/sequential/metadata/
-data/sequential/originals/
+data/
+datasets/
+results/
 
 # Producer-only material and local credentials
 .env

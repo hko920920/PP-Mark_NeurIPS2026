@@ -30,65 +30,8 @@ class MethodSpec:
     metadata_derived_keys: bool = False
 
 
-METHODS = (
-    MethodSpec(
-        "clean",
-        "Clean",
-        Path("outputs/attacks/muller_forgery_report_prep/clean/eval/manifest.jsonl"),
-    ),
-    MethodSpec(
-        "pp_mark",
-        "PP-Mark",
-        Path("outputs/attacks/muller_forgery_report_prep/methods/pp_mark/eval/manifest_fixed.jsonl"),
-        metadata_derived_keys=True,
-    ),
-    MethodSpec(
-        "gaussian_shading",
-        "Gaussian Shading",
-        Path("outputs/attacks/muller_forgery_report_prep/methods/gaussian_shading/eval/manifest.jsonl"),
-    ),
-    MethodSpec(
-        "hidden",
-        "HiDDeN",
-        Path("outputs/attacks/muller_forgery_report_prep/methods/hidden_revisited/eval/manifest.jsonl"),
-    ),
-    MethodSpec(
-        "invismark",
-        "InvisMark",
-        Path("outputs/attacks/muller_forgery_report_prep/methods/invismark/eval/manifest.jsonl"),
-    ),
-    MethodSpec(
-        "ringid",
-        "RingID",
-        Path("outputs/attacks/muller_forgery_report_prep/methods/ringid/eval/manifest.jsonl"),
-    ),
-    MethodSpec(
-        "stable_signature",
-        "Stable Signature",
-        Path("outputs/attacks/muller_forgery_report_prep/methods/stable_signature/eval/manifest.jsonl"),
-    ),
-    MethodSpec(
-        "tree_ring",
-        "Tree-Ring",
-        Path("outputs/attacks/muller_forgery_report_prep/methods/tree_ring/eval/manifest.jsonl"),
-    ),
-    MethodSpec(
-        "wind",
-        "WIND",
-        Path("outputs/rebuttal_quality_baselines_n100/wind_common100/manifest.jsonl"),
-    ),
-    MethodSpec(
-        "trustmark",
-        "TrustMark",
-        Path("outputs/attacks/muller_forgery_report_prep/methods/trustmark_hidden/eval/manifest.jsonl"),
-    ),
-)
-
-
-def load_method_specs(path: Path | None = None) -> Tuple[MethodSpec, ...]:
-    """Read portable manifest locations; preserve historical defaults when omitted."""
-    if path is None:
-        return METHODS
+def load_method_specs(path: Path) -> Tuple[MethodSpec, ...]:
+    """Read explicitly supplied method manifests, relative to their JSON file."""
     rows = json.loads(path.read_text(encoding="utf-8"))
     specs = []
     for row in rows:
@@ -554,7 +497,7 @@ def main() -> None:
         description="Matched BRISQUE and KID evaluation for the NeurIPS 2026 PP-Mark rebuttal."
     )
     parser.add_argument("--output", default="outputs/rebuttal_quality_baselines_n100")
-    parser.add_argument("--methods-file", type=Path, help="JSON method list with paths relative to that file")
+    parser.add_argument("--methods-file", type=Path, required=True, help="JSON method list with paths relative to that file")
     parser.add_argument("--expected-count", type=int, default=100)
     parser.add_argument("--device", default="cuda")
     parser.add_argument("--batch-size", type=int, default=16)

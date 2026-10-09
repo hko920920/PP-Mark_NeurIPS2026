@@ -14,7 +14,7 @@ inputs. The two modes provide different assurance levels.
 This source release includes the post-submission implementation updates and the
 SP1 v6.3.1 streaming-v2 path. The Python import name remains `ppmark_v03` for
 compatibility. See [implementation](docs/architecture.md),
-[experiments and reference results](docs/REPRODUCE.md), and
+[evaluation instructions](docs/REPRODUCE.md), and
 [external models](docs/MODELS.md).
 
 ## Install
@@ -37,9 +37,6 @@ python -m pip install -r requirements.txt
 python -m pip install --no-deps -e .
 ```
 
-These diffusion package versions follow the preserved rebuttal bootstrap
-configuration. The historical quality-evaluation environment is recorded in
-`results/reference/quality_environment.json`; it was a separate environment.
 Optional evaluation dependencies:
 
 ```bash
@@ -99,7 +96,7 @@ python -m ppmark_v03.cli verifier \
   --metadata outputs/demo/metadata.json \
   --image outputs/demo/watermarked.png \
   --mode detect \
-  --tau-file datasets/thresholds/tau_fpr1_alpha4_sd21_paper.json \
+  --tau-file tau_fpr1_alpha4_sd21.json \
   --ddim-device cuda --ddim-dtype float32 --ddim-steps 100
 ```
 
@@ -112,7 +109,7 @@ SP1_PROVER=cpu python -m ppmark_v03.cli verifier \
   --image outputs/demo/watermarked.png \
   --mode attest \
   --expected-key-commitment "$(cat outputs/trust/producer_commitment.txt)" \
-  --tau-file datasets/thresholds/tau_fpr1_alpha4_sd21_paper.json \
+  --tau-file tau_fpr1_alpha4_sd21.json \
   --ddim-device cuda --ddim-dtype float32 --ddim-steps 100
 ```
 
@@ -130,8 +127,7 @@ An SDXL configuration is included as `config_alpha4_k1000_sdxl.json`.
 
 ## Experiments
 
-The [reproduction guide](docs/REPRODUCE.md) connects each included evaluation to
-its inputs, settings, and existing result records:
+The [evaluation guide](docs/REPRODUCE.md) describes input formats and commands for:
 
 - claim-conditioned detection and transformation evaluation;
 - sequential crop–resize–JPEG evaluation;
@@ -139,11 +135,9 @@ its inputs, settings, and existing result records:
 - BRISQUE, KID, and CLIP comparisons;
 - SP1 proving/verification timing.
 
-Large model weights and generated images are obtained or generated separately.
-`data/` contains prompt/seed identities and input manifests; it does not contain
-the referenced image collections. `results/reference/` contains preserved
-results, with provenance described in the guide. This packaging update did not
-rerun GPU experiments or remeasure paper performance.
+Generate images with the provided code or supply your own evaluation collection.
+The tools accept image/metadata paths through JSONL manifests. Pretrained model
+weights are downloaded separately as described in the model guide.
 
 ## Citation
 

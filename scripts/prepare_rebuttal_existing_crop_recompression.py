@@ -66,8 +66,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--indices", default="0,1,2")
     parser.add_argument("--qualities", default="75,25")
-    parser.add_argument("--crop-root", default="data/sequential", help="Directory containing crop images, manifest_crop.jsonl, crop_boxes.json and crop scores")
-    parser.add_argument("--metadata-root", default="data/sequential", help="Base for metadata paths in the crop manifest")
+    parser.add_argument("--crop-root", required=True, help="Directory containing crop images, manifest_crop.jsonl, crop_boxes.json and crop scores")
+    parser.add_argument("--metadata-root", help="Base for metadata paths in the crop manifest; defaults to --crop-root")
     parser.add_argument(
         "--output-dir", default="outputs/rebuttal_existing_crop_recompression_pilot"
     )
@@ -91,7 +91,7 @@ def main() -> None:
     output.mkdir(parents=True)
 
     crop_root = (root / args.crop_root).resolve()
-    pp_eval_root = (root / args.metadata_root).resolve()
+    pp_eval_root = (root / args.metadata_root).resolve() if args.metadata_root else crop_root
     crop_rows = {
         int(row["idx"]): row for row in read_jsonl(crop_root / "manifest_crop.jsonl")
     }

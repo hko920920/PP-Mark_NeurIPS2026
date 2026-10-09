@@ -1,0 +1,6 @@
+[build]
+target-dir = "../target/sp1"
+
+[env]
+# Use the caller's compiler; the build helper prefers GCC 12 when available.
+RUSTFLAGS = { value = "-C target-cpu=native", force = false }

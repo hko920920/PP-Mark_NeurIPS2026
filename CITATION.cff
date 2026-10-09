@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use PP-Mark, please cite the accompanying paper."
+type: software
+title: "PP-Mark: Provable and Publicly Verifiable Watermarking for Generative AI"
+version: 0.4.0
+repository-code: "https://github.com/hko920920/PP-Mark_NeurIPS2026"
+license: MIT
+authors:
+  - family-names: Ko
+    given-names: Hankyeong
+    affiliation: "Graduate School of Virtual Convergence, Sogang University"
+    email: hko920920@sogang.ac.kr
+  - family-names: Kim
+    given-names: Taehoon
+    affiliation: "Graduate School of Virtual Convergence, Sogang University"
+    email: taehoonkim@sogang.ac.kr
+preferred-citation:
+  type: conference-paper
+  title: "PP-Mark: Provable and Publicly Verifiable Watermarking for Generative AI"
+  authors:
+    - family-names: Ko
+      given-names: Hankyeong
+    - family-names: Kim
+      given-names: Taehoon
+  year: 2026
+  conference:
+    name: "Conference on Neural Information Processing Systems (NeurIPS)"

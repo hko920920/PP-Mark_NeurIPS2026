@@ -1,0 +1,58 @@
+# Python and local environments
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv*/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+
+# Rust/SP1 builds; keep Cargo.lock and the source inverse-CDF LUT.
+target/
+sp1/target/
+*.elf
+
+# Generated experiments and downloaded models
+outputs/
+out_demo*/
+attack_logs/
+models/
+checkpoints/
+.cache/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.npy
+*.npz
+data/quality_inputs/*/images/
+data/quality_inputs/*/metadata/
+data/quality_1000/*/images/
+data/sequential/img_*/
+data/sequential/metadata/
+data/sequential/originals/
+
+# Producer-only material and local credentials
+.env
+.env.*
+!.env.example
+private/
+private_keys/
+secrets/
+*private_witness*.json
+*secret_key*
+*producer_secret*
+*.pem
+*.key
+*receipt*.bin
+
+# Editor / OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log

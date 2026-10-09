@@ -1,0 +1,124 @@
+{
+  "protocol": {
+    "method_count": 100,
+    "method_design": "100 common prompt/seed pairs shared by all methods",
+    "clean_reference_count": 900,
+    "clean_reference": "The 900 clean images in the validated 1,000-image clean manifest whose prompt/seed keys are disjoint from the common-100 method set.",
+    "kid_estimator": "Unbiased polynomial MMD, (x^T y / d + 1)^3",
+    "kid_features": "Cached torchvision Inception_V3_Weights.DEFAULT features, fc=Identity",
+    "kid_subset_size": 100,
+    "kid_reference_resamples": 1000,
+    "seed": 20260725,
+    "finite_sample_note": "Unbiased KID can be slightly negative at finite sample sizes. Negative values near zero are not interpreted as better-than-identical quality."
+  },
+  "methods": {
+    "pp_mark": {
+      "label": "PP-Mark",
+      "method_n": 100,
+      "clean_reference_n": 900,
+      "subset_size": 100,
+      "splits": 1000,
+      "mean": -0.0004377130844404853,
+      "std": 0.0007710280107545919,
+      "median": -0.0005182270902519548,
+      "p025": -0.0016958562907974373,
+      "p975": 0.0012472330743611758
+    },
+    "gaussian_shading": {
+      "label": "Gaussian Shading",
+      "method_n": 100,
+      "clean_reference_n": 900,
+      "subset_size": 100,
+      "splits": 1000,
+      "mean": 0.000621091517813701,
+      "std": 0.001095648112938852,
+      "median": 0.0004275053119167094,
+      "p025": -0.0010328172347202958,
+      "p975": 0.0030669687960745208
+    },
+    "hidden": {
+      "label": "HiDDeN",
+      "method_n": 100,
+      "clean_reference_n": 900,
+      "subset_size": 100,
+      "splits": 1000,
+      "mean": 0.007239153689465063,
+      "std": 0.001474443633773324,
+      "median": 0.007105586105102368,
+      "p025": 0.004749323638198933,
+      "p975": 0.010326197550910675
+    },
+    "invismark": {
+      "label": "InvisMark",
+      "method_n": 100,
+      "clean_reference_n": 900,
+      "subset_size": 100,
+      "splits": 1000,
+      "mean": -0.0008998411854978512,
+      "std": 0.0008948710220501942,
+      "median": -0.000983833718553484,
+      "p025": -0.002451570645142687,
+      "p975": 0.0010113598713293525
+    },
+    "ringid": {
+      "label": "RingID",
+      "method_n": 100,
+      "clean_reference_n": 900,
+      "subset_size": 100,
+      "splits": 1000,
+      "mean": -0.0009889762792757333,
+      "std": 0.0007009225747770673,
+      "median": -0.0010250771830588867,
+      "p025": -0.0021132192554037753,
+      "p975": 0.0006095704301656955
+    },
+    "stable_signature": {
+      "label": "Stable Signature",
+      "method_n": 100,
+      "clean_reference_n": 900,
+      "subset_size": 100,
+      "splits": 1000,
+      "mean": -0.000813640787329541,
+      "std": 0.0008779605397983435,
+      "median": -0.0009001177056506826,
+      "p025": -0.002292137488258639,
+      "p975": 0.0011932912706627552
+    },
+    "tree_ring": {
+      "label": "Tree-Ring",
+      "method_n": 100,
+      "clean_reference_n": 900,
+      "subset_size": 100,
+      "splits": 1000,
+      "mean": -9.03381795643119e-05,
+      "std": 0.0009218355236840747,
+      "median": -0.0002164198451806154,
+      "p025": -0.001495276879307328,
+      "p975": 0.002158886684888094
+    },
+    "wind": {
+      "label": "WIND",
+      "method_n": 100,
+      "clean_reference_n": 900,
+      "subset_size": 100,
+      "splits": 1000,
+      "mean": -0.00038618304795203786,
+      "std": 0.0008793644260247158,
+      "median": -0.0005229421168473358,
+      "p025": -0.001815572129433074,
+      "p975": 0.0017088402456838286
+    },
+    "trustmark": {
+      "label": "TrustMark",
+      "method_n": 100,
+      "clean_reference_n": 900,
+      "subset_size": 100,
+      "splits": 1000,
+      "mean": -0.00017409010299468218,
+      "std": 0.0010008544906938575,
+      "median": -0.0003033597525623488,
+      "p025": -0.0017802377948047954,
+      "p975": 0.0020363642260737163
+    }
+  }
+}

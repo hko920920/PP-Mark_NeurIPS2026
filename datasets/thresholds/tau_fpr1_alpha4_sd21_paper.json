@@ -1,0 +1,12 @@
+{
+  "tau_score": 2.4665623073926706,
+  "fpr_target": 0.01,
+  "source": "Frozen submitted threshold retained by the July 2026 rebuttal protocol; see docs/REPRODUCE.md.",
+  "source_script": "scripts/run_rebuttal_existing_crop_recompression_multigpu.sh",
+  "alpha": 4.0,
+  "sample_count": 1000,
+  "model_family": "SD2.1",
+  "inversion_dtype": "float32",
+  "inversion_steps": 100,
+  "note": "Historical reference threshold, not recalibrated for this release. Use the documented matching evaluation conditions; calibrate separately when they change."
+}

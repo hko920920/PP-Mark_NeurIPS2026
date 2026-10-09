@@ -1,0 +1,4 @@
+-r requirements.txt
+cryptography>=41
+pyiqa==0.1.16
+matplotlib>=3.7

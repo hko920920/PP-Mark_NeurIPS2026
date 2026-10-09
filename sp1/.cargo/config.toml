@@ -1,0 +1,8 @@
+[build]
+target-dir = "../target/sp1"
+
+[env]
+# H100/CUDA 12.2에서 호스트 컴파일러를 GCC 12로 고정
+CC = { value = "/usr/bin/gcc-12", force = false }
+CXX = { value = "/usr/bin/g++-12", force = false }
+RUSTFLAGS = { value = "-C target-cpu=native", force = false }

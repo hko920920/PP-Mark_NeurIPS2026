@@ -1,0 +1,30 @@
+[workspace]
+members = ["host", "guest"]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[workspace.dependencies]
+anyhow = "1.0"
+bincode = "1.3"
+hex = "0.4"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+# Pin the host SDK to the exact SP1 release used by the validated protocol-v2
+# timing and tamper campaign. The blocking API keeps the CLI deterministic;
+# CUDA remains available through SP1_PROVER=cuda.
+sp1-sdk = { version = "=6.3.1", default-features = false, features = ["blocking"] }
+
+[patch.crates-io]
+# SP1-compatible SHA-256 patch paired with the v6.3.1 guest toolchain.
+sha2 = { git = "https://github.com/sp1-patches/RustCrypto-hashes", tag = "patch-sha2-0.10.9-sp1-6.2.0" }
+
+[profile.release]
+# This is the frozen profile used by the validated protocol-v2 v6.3.1 ELF
+# (381,384 bytes; SHA-256 1a9eb1a3...4519). Keeping it in the manifest prevents
+# a default release build from silently producing a different proving program.
+lto = "fat"
+codegen-units = 1

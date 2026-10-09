@@ -1,0 +1,14 @@
+[
+  {
+    "slug": "clean",
+    "label": "Clean",
+    "manifest": "quality_1000/clean/manifest.jsonl",
+    "metadata_derived_keys": false
+  },
+  {
+    "slug": "pp_mark",
+    "label": "PP-Mark",
+    "manifest": "quality_1000/pp_mark/manifest.jsonl",
+    "metadata_derived_keys": false
+  }
+]

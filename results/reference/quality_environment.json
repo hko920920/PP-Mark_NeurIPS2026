@@ -1,0 +1,11 @@
+{
+  "python": "3.11.5 | packaged by Anaconda, Inc. | (main, Sep 11 2023, 13:26:23) [MSC v.1916 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "numpy": "1.26.4",
+  "torch": "2.6.0+cu124",
+  "torchvision": "0.21.0+cpu",
+  "pyiqa": "0.1.16",
+  "requested_device": "cuda",
+  "cuda_available": true,
+  "cuda_device": "NVIDIA GeForce RTX 3070"
+}

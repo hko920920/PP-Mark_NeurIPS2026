@@ -1,0 +1,418 @@
+{
+  "dataset_id": "Gustavosta/Stable-Diffusion-Prompts",
+  "dataset_split": "train",
+  "prompt_key": "",
+  "seed": 2025,
+  "prompt_count": 100,
+  "sources": {
+    "pos_manifest": "outputs/pos_wm_a4_k1000_sd21_200_combined/manifest.jsonl",
+    "neg_prompts": "datasets/neg_calib_1000_sd21/prompts.json",
+    "extra_prompts": "datasets/neg_calib_1000/prompts.json",
+    "pos_count": 25,
+    "neg_extra_count": 25,
+    "extra_count": 50,
+    "sampled_extra_count": 0
+  },
+  "prompts": [
+    {
+      "prompt_id": 0,
+      "prompt_text": "door from lord of the rings"
+    },
+    {
+      "prompt_id": 1,
+      "prompt_text": "cats living in a cat house interior overview mapa design"
+    },
+    {
+      "prompt_id": 2,
+      "prompt_text": "empty bowl with a few rice grains and broken chinese chopsticks"
+    },
+    {
+      "prompt_id": 3,
+      "prompt_text": "soft bokeh front shot photo of a mclaren steampunk concept car"
+    },
+    {
+      "prompt_id": 4,
+      "prompt_text": "girl sitting on a spaceship window"
+    },
+    {
+      "prompt_id": 5,
+      "prompt_text": "a cat wearing a wig"
+    },
+    {
+      "prompt_id": 6,
+      "prompt_text": "a notepad as front door"
+    },
+    {
+      "prompt_id": 7,
+      "prompt_text": "a flower goddess"
+    },
+    {
+      "prompt_id": 8,
+      "prompt_text": "a woman sitting on a window sill looking out the window"
+    },
+    {
+      "prompt_id": 9,
+      "prompt_text": "futuristic city center with 8 9 0 j maglev train in background"
+    },
+    {
+      "prompt_id": 10,
+      "prompt_text": "a single colossal sloth hanging from a giant redwood tree"
+    },
+    {
+      "prompt_id": 11,
+      "prompt_text": "man standing in front of an abandoned house in a forest"
+    },
+    {
+      "prompt_id": 12,
+      "prompt_text": "large scandinavian style houses with a rounded roof modern house"
+    },
+    {
+      "prompt_id": 13,
+      "prompt_text": "a animalistic woman with her skin covered in plant patterns"
+    },
+    {
+      "prompt_id": 14,
+      "prompt_text": "white haired woman in a skirt sitting on a window"
+    },
+    {
+      "prompt_id": 15,
+      "prompt_text": "a young girl wearing a cat hoodie balancing a a white fence"
+    },
+    {
+      "prompt_id": 16,
+      "prompt_text": "a white cat with blue eyes wearing a red formal overcoat"
+    },
+    {
+      "prompt_id": 17,
+      "prompt_text": "portrait an astronaut looking into a mirror made of the Cosmos"
+    },
+    {
+      "prompt_id": 18,
+      "prompt_text": "crystal tree splash cyberpunk"
+    },
+    {
+      "prompt_id": 19,
+      "prompt_text": "portrait of a dwarf Japanese chin dog"
+    },
+    {
+      "prompt_id": 20,
+      "prompt_text": "cute cat looking down on huge cyberpunk style city"
+    },
+    {
+      "prompt_id": 21,
+      "prompt_text": "a talking tree"
+    },
+    {
+      "prompt_id": 22,
+      "prompt_text": "the hogwarts express jacobite steam train"
+    },
+    {
+      "prompt_id": 23,
+      "prompt_text": "a squad riding to party in car"
+    },
+    {
+      "prompt_id": 24,
+      "prompt_text": "a space realistic cat with big and cute eyes"
+    },
+    {
+      "prompt_id": 25,
+      "prompt_text": "barbarella as a robotic 8 0 s cat - girl"
+    },
+    {
+      "prompt_id": 26,
+      "prompt_text": "sketch portrait of slavoj zizek with a coca cola bottle"
+    },
+    {
+      "prompt_id": 27,
+      "prompt_text": "glowwave portrait of cat from borderlands 3"
+    },
+    {
+      "prompt_id": 28,
+      "prompt_text": "potrait of cat body made of multiple dogs"
+    },
+    {
+      "prompt_id": 29,
+      "prompt_text": "greg manchess mid century album cover featuring a man with a notebook"
+    },
+    {
+      "prompt_id": 30,
+      "prompt_text": "cat seahorse mermaid shapeshifter wearing a comfy sweater"
+    },
+    {
+      "prompt_id": 31,
+      "prompt_text": "risque tom raider serving table at a night cyberpunk club"
+    },
+    {
+      "prompt_id": 32,
+      "prompt_text": "a picture of people in the bus in the car accident"
+    },
+    {
+      "prompt_id": 33,
+      "prompt_text": "an majestic portrait of a man mixed with a black dog"
+    },
+    {
+      "prompt_id": 34,
+      "prompt_text": "portrait of a swat cat"
+    },
+    {
+      "prompt_id": 35,
+      "prompt_text": "a beautiful picture of a cat as a sushi roll"
+    },
+    {
+      "prompt_id": 36,
+      "prompt_text": "a cat merged with a dog"
+    },
+    {
+      "prompt_id": 37,
+      "prompt_text": "romantic and fashion and love princess  of the flower with sheath dress"
+    },
+    {
+      "prompt_id": 38,
+      "prompt_text": "evil amber heard as a comic book super villain"
+    },
+    {
+      "prompt_id": 39,
+      "prompt_text": "a Belgian Blue mixed with a cat"
+    },
+    {
+      "prompt_id": 40,
+      "prompt_text": "A cat grim reaper"
+    },
+    {
+      "prompt_id": 41,
+      "prompt_text": "micheal myers looking through a window"
+    },
+    {
+      "prompt_id": 42,
+      "prompt_text": "portrait of the secretive vampire woman biker loner smiling at her cat"
+    },
+    {
+      "prompt_id": 43,
+      "prompt_text": "nicki minaj is walking like a dog"
+    },
+    {
+      "prompt_id": 44,
+      "prompt_text": "cartoonish leonardo di caprio drinking wine from a cup and laughing meme"
+    },
+    {
+      "prompt_id": 45,
+      "prompt_text": "will ferrell becoming a bowl of chili"
+    },
+    {
+      "prompt_id": 46,
+      "prompt_text": "cat seahorse shapeshifter"
+    },
+    {
+      "prompt_id": 47,
+      "prompt_text": "a fat cat surfing on a rainbow in space"
+    },
+    {
+      "prompt_id": 48,
+      "prompt_text": "a man fights an explosion with a knife"
+    },
+    {
+      "prompt_id": 49,
+      "prompt_text": "michael jackson holding a huge bottle of beer"
+    },
+    {
+      "prompt_id": 50,
+      "prompt_text": "rachel weisz, portrait, colorful and vibrant majestic, royal, open wide eyes, drops of tear with flowers on her hair, glowing light orbs, intricate concept art, elegant, digital painting, smooth, sharp focus, ethereal opalescent mist, outrun, vaporware, cyberpunk darksynth, ethereal, ominous, misty, 8 k, by ruan jia and miho hirano, rendered in octane"
+    },
+    {
+      "prompt_id": 51,
+      "prompt_text": "your mom is a cosmic horror by bruce brenneise, digital concept art, trending on cgsociety, trending on artstation"
+    },
+    {
+      "prompt_id": 52,
+      "prompt_text": "biblical shy beautiful female druid android, made of glass, bright glowing veins, in clouds, ultra realistic, concept art, intricate details, serious, highly detailed, photorealistic, octane render, 8 k, unreal engine, art by todd mcfarlane and artgerm and greg rutkowski and alphonse mucha"
+    },
+    {
+      "prompt_id": 53,
+      "prompt_text": "front!!! shot of a court jester!!! character, mesmerizing hypercubes, dark holography!!!, future, oil slick, crystalline edges, (((intricate))), elegant, highly detailed, centered, (((artstation, concept art, smooth, sharp focus, artgerm, Tomasz Alen Kopera, Peter Mohrbacher, donato giancola, Joseph Christian Leyendecker, WLOP, Boris Vallejo))), ((raytracing)), mugshot!!!!!, ugly!!!!!!, octane render, nvidia raytracing demo, octane render, nvidia raytracing demo, octane render, nvidia raytracing demo, grainy, muted, 8K, digitalblasphemy, metatron"
+    },
+    {
+      "prompt_id": 54,
+      "prompt_text": "portrait of disney snowhite, intricate, elegant, highly detailed, my rendition, digital painting, artstation, concept art, smooth, sharp focus, illustration, art by artgerm and greg rutkowski and alphonse mucha and uang guangjian and gil elvgren and sachin teng, symmetry!!"
+    },
+    {
+      "prompt_id": 55,
+      "prompt_text": "portrait art of zombie astronaut, concept art oil painting by Jama Jurabaev, extremely detailed, brush hard, artstation"
+    },
+    {
+      "prompt_id": 56,
+      "prompt_text": "a beautiful red haired melancholic girl in white dress sitting on wooden trunk in a garden holding a bunch of wild flowers, deep focus, d & d, fantasy, intricate, elegant, highly detailed, digital painting, artstation, concept art, matte, sharp focus, 3 d, octane render, hearthstone, well rendered, art by artgerm and greg rutkowski and alphonse mucha"
+    },
+    {
+      "prompt_id": 57,
+      "prompt_text": "four dimensional parallel universe infinite cosmic rubik's cube hypercube tesseract with wormholes, energy and galaxies around it. epic, dramatic, cinematic, digital art, octane render, blender, 8 k, hyperrealistic, trending on artstation"
+    },
+    {
+      "prompt_id": 58,
+      "prompt_text": "this is democracy manifest, concept art, matte painting, trending artstation, octane render, plague, apocalyptic 8k"
+    },
+    {
+      "prompt_id": 59,
+      "prompt_text": "Cold Rain in the Melancholic Estate, game concept art by Akihiko Yoshida, trending on artstation and cgsociety"
+    },
+    {
+      "prompt_id": 60,
+      "prompt_text": "a high quality anime still frame of a business person on vacation at the beach, cat head, person with cat head, only cat heads, anime, perfect shading, atmospheric lighting, by makoto shinkai, stanley artgerm lau, wlop, rossdraws, gibli"
+    },
+    {
+      "prompt_id": 61,
+      "prompt_text": "a very beautiful young clint eastwood, full body, long wavy blond hair, sky blue eyes, full round face,, bikini, miniskirt, front shot, highly detailed, cinematic wallpaper by stanley artgerm lau"
+    },
+    {
+      "prompt_id": 62,
+      "prompt_text": "ancient queen billie eilish, symetrical, diffuse lighting, fantasy, intricate, elegant, highly detailed, lifelike, photorealistic, digital painting, artstation, illustration, concept art, 4 k, smooth, sharp focus, art by john collier and albert aublet and krenz cushart and artem demura and alphonse mucha"
+    },
+    {
+      "prompt_id": 63,
+      "prompt_text": "symmetry portrait of mercy from overwatch as a male man, sci - fi, tech wear, glowing lights intricate, elegant, highly detailed, digital painting, artstation, concept art, smooth, sharp focus, illustration, art by artgerm and greg rutkowski and alphonse mucha"
+    },
+    {
+      "prompt_id": 64,
+      "prompt_text": "an airport lounge, with big airplane outside, epic scene, by victo ngai, kilian eng vibrant colours, dynamic lighting, digital art, winning award masterpiece, fantastically beautiful, illustration, aesthetically inspired by beksinski and dan mumford, trending on artstation, art by greg rutkowski, 8 k"
+    },
+    {
+      "prompt_id": 65,
+      "prompt_text": "3D render of an intricate robot made of pieces of scraps and rusted parts in the style of Vladimir Petkovic, dramatic lighting, vibrant colors, Trending on Artstation HQ, 4K, UHD, High quality, Unreal Engine"
+    },
+    {
+      "prompt_id": 66,
+      "prompt_text": "closeup portrait shot of winona ryder as delirium of the endless, the sandman, thick fancy makeup, highly detailed, digital painting, artstation, concept art, soft focus, depth of field, artgerm, tomasz alen kopera, peter mohrbacher, donato giancola, joseph christian leyendecker, wlop, boris vallejo"
+    },
+    {
+      "prompt_id": 67,
+      "prompt_text": "a framed painting of a halloween scene in a suburban neighborhood.. highly detailed science fiction painting by norman rockwell, frank frazetta, and syd mead. rich colors, high contrast, gloomy atmosphere, dark background. trending on artstation"
+    },
+    {
+      "prompt_id": 68,
+      "prompt_text": "portrait of handsome black genius wearing a hoodie in front several curved holographic displays, luxury condo interior, elegant atmosphere, glowing lights, highly detailed, digital painting, artstation, concept art, smooth, sharp focus, illustration, art by wlop, mars ravelo and greg rutkowski"
+    },
+    {
+      "prompt_id": 69,
+      "prompt_text": "portrait of a beautiful mysterious woman holding a bouquet of flowing flowers, wet dripping long hair, hands hidden under the bouquet, emerging from the water, fantasy, regal, intricate, by stanley artgerm lau, greg rutkowski, thomas kindkade, alphonse mucha, loish, norman rockwell"
+    },
+    {
+      "prompt_id": 70,
+      "prompt_text": "Detailed matte painting glamour shot of a dapper male sitting at a desk with fancy meal by Karol Bak and Thomas Eakins, centered, inside interior Victorian art deco elegant dining room with large windows with view of Florence Italy by Lee Madgwick and Canaletto, by Beeple, unreal engine, trending on artstation behance 500px, Victorian, Calvin Coolidge, Famous artwork by Van Gogh hanging on walls, volumetric lighting, cinematic lighting, realistic lighting, detailed lighting, 4k hd wallpaper"
+    },
+    {
+      "prompt_id": 71,
+      "prompt_text": "winston from overwatch, character portrait, portrait, close up, concept art, intricate details, highly detailed by greg rutkowski, michael whelan and gustave dore"
+    },
+    {
+      "prompt_id": 72,
+      "prompt_text": "girl with long light green hair, light green eyes, a small pigtail on the left side, chinese dress, anime style, hyper detailed, illustration, digital painting, art by artgerm and greg rutkowski and alphonse mucha, high delicate defined details, anime stylized, highly detailed, realistic, sharp focus, artstation"
+    },
+    {
+      "prompt_id": 73,
+      "prompt_text": "female plague doctor donning a black hood, steel knightly armor and a white armored crow mask, trending on artstation"
+    },
+    {
+      "prompt_id": 74,
+      "prompt_text": "travelling merchant is attacked by two dragons, solar field plains, front game card, drark, marvel comics, dark, intricate, highly detailed, smooth, artstation, digital illustration by ruan jia and mandy jurgens and artgerm and wayne barlowe and greg rutkowski and zdislav beksinski"
+    },
+    {
+      "prompt_id": 75,
+      "prompt_text": "Digital painting of King Arthur wielding his Sword, on the battlefield, war cry, ethereal, smoke, ominous, octane render, 8k, trending on ArtStation"
+    },
+    {
+      "prompt_id": 76,
+      "prompt_text": "dog jumps over hill, dog looks like elephant!, intricate, epic lighting, cinematic composition, hyper realistic, 8 k resolution, unreal engine 5, by artgerm, tooth wu, dan mumford, beeple, wlop, rossdraws, james jean, marc simonetti, artstation"
+    },
+    {
+      "prompt_id": 77,
+      "prompt_text": "a drawing of a yellow race car with the sun in the background, concept illustration by stefan gierowski, trending on artstation, retrofuturism, 2 d game art, concept art, matte illustration"
+    },
+    {
+      "prompt_id": 78,
+      "prompt_text": "portrait of the shy farm girl smiling, by katsuhiro otomo, yoshitaka amano, nico tanigawa, and artgerm rendered with 3 d effect."
+    },
+    {
+      "prompt_id": 79,
+      "prompt_text": "gloomy ruined server room in datacenter painting concept art of robot monster titan colossus pacing, sharp focus, emitting diodes, smoke, artillery, pacing, computers racks motherboard cinematic dramatic volumetric lighting by rutkowski artstation detailed matte painting, 4 k resolution"
+    },
+    {
+      "prompt_id": 80,
+      "prompt_text": "Boris Johnson as movie Wolverine, claws are up, yellow X-man costume, calm, grumpy, portrait, masculine figure, highly detailed, digital painting, artstation, concept art, smooth, sharp focus, illustration, cinematic lighting, art by artgerm and greg rutkowski and alphonse mucha"
+    },
+    {
+      "prompt_id": 81,
+      "prompt_text": "glamorous angewoman digimon , very detailed face, studio lighting, portrait by Magali Villeneuve and Steve Argyle,Livia Prima,Mucha,fantasy art,beautiful,artstation,trending on artstation,alluring,masterpiece"
+    },
+    {
+      "prompt_id": 82,
+      "prompt_text": "octopus immersed in laboratory glass tanks, blue color scheme, digital illustration, dramatic lighting, cinematic composition, concept art, detailed textures"
+    },
+    {
+      "prompt_id": 83,
+      "prompt_text": "a dancer in silhouette wearing a flowing gown made of fire, engulfed in a whirling fire tornado firestorm, emitting smoke and sparks, fantasy, cinematic, fine details by realistic shaded lighting poster by ilya kuvshinov katsuhiro otomo, magali villeneuve, artgerm, jeremy lipkin and michael garmash and rob rey"
+    },
+    {
+      "prompt_id": 84,
+      "prompt_text": "dream portrait of a cat wizard wearing blue robes, dreamy and ethereal, expressive pose, big pink eyes, exciting expression, fantasy, intricate, elegant, many rainbow bubbles, rose tones, highly detailed, digital painting, artstation, concept art,cyberpunk wearing, smooth, sharp focus, illustration, art by artgerm and greg rutkowskiand alphonse mucha,Salvador Dali."
+    },
+    {
+      "prompt_id": 85,
+      "prompt_text": "stunningly ominous, sniper wearing a trench coat on a perch facing the city at night, smooth, focus, highly detailed, hyper realistic, dramatic lighting, intricate, concept art, new york skyline, looking down, art by wlop, mars ravelo, greg rutowski, artstation"
+    },
+    {
+      "prompt_id": 86,
+      "prompt_text": "highly detailed surreal vfx portrait of an incredible cityscape, stephen bliss, unreal engine, greg rutkowski, loish, rhads, beeple, makoto shinkai and lois van baarle, global illumination, detailed and intricate environment"
+    },
+    {
+      "prompt_id": 87,
+      "prompt_text": "an art nouveau copic maker sketch of an architecture student girl wearing evangelion pilot suit designed by balenciaga by john berkey by stanley artgerm lau, greg rutkowski, thomas kinkade, alphonse mucha, loish, norman rockwell"
+    },
+    {
+      "prompt_id": 88,
+      "prompt_text": "3 / 4 view of a portrait of woman with flowy hair, bird wings, confident pose, pixie, genshin impact,, intricate, elegant, sharp focus, illustration, highly detailed, concept art, matte, trending on artstation, bright colors, art by wlop and artgerm and greg rutkowski, marvel comics h 6 4 0"
+    },
+    {
+      "prompt_id": 89,
+      "prompt_text": "female realistic horror characters, Moebius, Greg Rutkowski, Zabrocki, Karlkka, Jayison Devadas, Phuoc Quan, trending on Artstation, 8K, ultra wide angle, pincushion lens effect"
+    },
+    {
+      "prompt_id": 90,
+      "prompt_text": "a beautiful painting of a rasta yakuza in gta, 3 d, concept art"
+    },
+    {
+      "prompt_id": 91,
+      "prompt_text": "alchemyst girl with cat ears, by WLOP, by Artgerm, by Michael Garmash, by Rob Rey, digital art, trending on artstation, beautiful lightning, atmospheric"
+    },
+    {
+      "prompt_id": 92,
+      "prompt_text": "closeup portrait shot of a black metal musician with corpse paint in a scenic dystopian environment, intricate, elegant, highly detailed, centered, digital painting, artstation, concept art, smooth, sharp focus, illustration, artgerm, tomasz alen kopera, peter mohrbacher, donato giancola, joseph christian leyendecker, wlop, boris vallejo"
+    },
+    {
+      "prompt_id": 93,
+      "prompt_text": "Hyper-realistic photo of the King of the Desert, Gold Armour suit, Sword, sand, handsome attractive face, attractive young man, beautiful face, dramatic lighting, majestic, D&D, fantasy, elegant, intricate, highly detailed, digital painting, concept art, sharp focus, illustration, trending on artstation, art by artgerm and greg rutkowski and alphonse mucha"
+    },
+    {
+      "prompt_id": 94,
+      "prompt_text": "warriors drinking in an irish pub, detailed faces, digital art, beautiful lighting, happy atmosphere, trending on artstation, by Yoshitaka Amano"
+    },
+    {
+      "prompt_id": 95,
+      "prompt_text": "a portrait of wario from mario bros., fantasy, sharp focus, intricate, elegant, digital painting, artstation, matte, highly detailed, concept art, illustration, ambient lighting, art by ilya kuvshinov, artgerm, alphonse mucha, and greg rutkowski"
+    },
+    {
+      "prompt_id": 96,
+      "prompt_text": "character concept art of a beautiful young anime orc woman | | cute - fine - face, pretty face, realistic shaded perfect face, fine details by stanley artgerm lau, wlop, rossdraws, james jean, andrei riabovitchev, marc simonetti, and sakimichan, tranding on artstation"
+    },
+    {
+      "prompt_id": 97,
+      "prompt_text": "beautiful very detailed portrait of a zelda princess with lots of jewelry in the face, full body, in the background there is a minimalistic palace, digital art , dramatic cinematic lighting rendered by octane, 8k, detailed, intricate, clean and textures, trending on artstation, treanding on deviantart, trending on cgsociety, pinterest, by Lauren Brevner + yasutomo oka"
+    },
+    {
+      "prompt_id": 98,
+      "prompt_text": "Jesus fighting the devil, dynamic lighting, photorealistic concept art, trending on art station, stunning visuals, creative, cinematic, ultra detailed"
+    },
+    {
+      "prompt_id": 99,
+      "prompt_text": "a portrait of anime shrek casting ice - ball and shoot it, cyberpunk concept art, trending on artstation, highly detailed, intricate, sharp focus, digital art, 8 k"
+    }
+  ]
+}

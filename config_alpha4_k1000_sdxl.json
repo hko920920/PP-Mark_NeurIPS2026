@@ -1,0 +1,39 @@
+{
+  "image": {
+    "pixel_resolution": [
+      1024,
+      1024
+    ],
+    "resolution": [
+      128,
+      128
+    ],
+    "sample_count": 1000,
+    "sample_rate": 0.01,
+    "alpha": 4.0
+  },
+  "model": {
+    "base": "stabilityai/stable-diffusion-xl-base-1.0",
+    "latent_dim": [
+      4,
+      128,
+      128
+    ]
+  },
+  "zk": {
+    "backend": "sp1",
+    "batch_time_min": 10,
+    "sample_backend": "sha256",
+    "k": 20,
+    "prover_cmd": "./target/sp1/release/sp1-genguard-host",
+    "verifier_cmd": "./target/sp1/release/sp1-genguard-host"
+  },
+  "watermark": {
+    "msg_bits": 256,
+    "rs_n": 64,
+    "rs_k": 32
+  },
+  "tables": {
+    "inverse_cdf_path": "tables/invcdf_gaussian.bin"
+  }
+}

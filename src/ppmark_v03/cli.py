@@ -122,7 +122,9 @@ def _load_secret(secret_hex: str | None, secret_file: Path | None) -> KeyPair:
         value = int(secret_hex, 16)
         public = derive_public_point(value)
         return KeyPair(secret=value, public=public)
-    if secret_file and secret_file.exists():
+    if secret_file is not None:
+        if not secret_file.is_file():
+            raise FileNotFoundError(f"Producer secret file not found: {secret_file}")
         value = int(secret_file.read_text().strip(), 16)
         public = derive_public_point(value)
         return KeyPair(secret=value, public=public)

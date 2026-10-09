@@ -8,6 +8,7 @@ import csv
 import hashlib
 import io
 import json
+import math
 import shutil
 from pathlib import Path
 from typing import Any, Iterable
@@ -28,6 +29,16 @@ def find_repo_root(start: Path) -> Path:
 def read_jsonl(path: Path) -> list[dict[str, Any]]:
     with path.open("r", encoding="utf-8") as handle:
         return [json.loads(line) for line in handle if line.strip()]
+
+
+def index_rows(rows: Iterable[dict[str, Any]]) -> dict[int, dict[str, Any]]:
+    indexed = {}
+    for row in rows:
+        index = int(row["idx"])
+        if index in indexed:
+            raise ValueError(f"Duplicate input index: {index}")
+        indexed[index] = row
+    return indexed
 
 
 def write_jsonl(path: Path, rows: Iterable[dict[str, Any]]) -> None:
@@ -84,22 +95,38 @@ def main() -> None:
     outputs_root = (root / "outputs").resolve()
     if outputs_root not in output.parents:
         raise ValueError("Choose an output subdirectory under this repository's outputs/")
+    crop_root = (root / args.crop_root).resolve()
+    pp_eval_root = (root / args.metadata_root).resolve() if args.metadata_root else crop_root
+    for input_root in (crop_root, pp_eval_root):
+        if input_root == output or output in input_root.parents:
+            raise ValueError("The output directory must not contain source inputs")
+    crop_rows = index_rows(read_jsonl(crop_root / "manifest_crop.jsonl"))
+    with (crop_root / "eval_crop_full100_maxlevers/scores.csv").open(
+        "r", encoding="utf-8", newline=""
+    ) as handle:
+        score_rows = index_rows(csv.DictReader(handle))
+    crop_boxes = json.loads((crop_root / "crop_boxes.json").read_text(encoding="utf-8"))
+
+    # Validate every requested input before replacing any previous output.
+    for index in indices:
+        if index not in crop_rows or index not in score_rows:
+            raise KeyError(f"Missing crop input for idx={index}")
+        if f"img_{index:03d}" not in crop_boxes:
+            raise KeyError(f"Missing crop coordinates for idx={index}")
+        if not math.isfinite(float(score_rows[index]["score"])):
+            raise ValueError(f"Non-finite crop score for idx={index}")
+        row = crop_rows[index]
+        for input_path in (crop_root / str(row["image_path"]), pp_eval_root / str(row["metadata_path"])):
+            input_path = input_path.resolve()
+            if not input_path.is_file():
+                raise FileNotFoundError(input_path)
+            if output in input_path.parents:
+                raise ValueError(f"Source input is inside the output directory: {input_path}")
     if output.exists():
         if not args.force:
             raise FileExistsError(f"Output exists: {output}; use --force")
         shutil.rmtree(output)
     output.mkdir(parents=True)
-
-    crop_root = (root / args.crop_root).resolve()
-    pp_eval_root = (root / args.metadata_root).resolve() if args.metadata_root else crop_root
-    crop_rows = {
-        int(row["idx"]): row for row in read_jsonl(crop_root / "manifest_crop.jsonl")
-    }
-    with (crop_root / "eval_crop_full100_maxlevers/scores.csv").open(
-        "r", encoding="utf-8", newline=""
-    ) as handle:
-        score_rows = {int(row["idx"]): row for row in csv.DictReader(handle)}
-    crop_boxes = json.loads((crop_root / "crop_boxes.json").read_text(encoding="utf-8"))
 
     manifests: dict[int, list[dict[str, Any]]] = {
         quality: [] for quality in qualities

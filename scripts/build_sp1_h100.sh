@@ -48,5 +48,5 @@ else
   echo "[sp1] CPU mode build"
 fi
 
-cargo build --release -p sp1-genguard-host "${FEATURES[@]}"
+cargo build --locked --release -p sp1-genguard-host "${FEATURES[@]}"
 echo "[sp1] build complete -> ${CARGO_TARGET_DIR}/release/sp1-genguard-host"

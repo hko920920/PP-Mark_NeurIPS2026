@@ -46,6 +46,8 @@ def _load_method_pairs(manifest_path: Path) -> Tuple[List[str], Dict[str, List[P
         prompt = str(row["prompt_text"])
         for method, raw_path in row["images"].items():
             image_path = Path(raw_path)
+            if not image_path.is_absolute():
+                image_path = manifest_path.parent / image_path
             if not image_path.exists():
                 raise FileNotFoundError(image_path)
             pairs[method].append((image_path, prompt))
@@ -88,11 +90,11 @@ def main() -> None:
     )
     parser.add_argument(
         "--manifest",
-        default="outputs/rebuttal_quality_baselines_n100_corrected/matched_manifest.jsonl",
+        required=True,
     )
     parser.add_argument(
         "--output",
-        default="outputs/rebuttal_quality_baselines_n100_corrected/clipscore",
+        default="outputs/quality/clipscore",
     )
     parser.add_argument("--model", default="openai/clip-vit-base-patch32")
     parser.add_argument("--device", default="cuda")
@@ -100,6 +102,8 @@ def main() -> None:
     parser.add_argument("--bootstrap-draws", type=int, default=10000)
     parser.add_argument("--seed", type=int, default=20260725)
     args = parser.parse_args()
+    if args.batch_size <= 0 or args.bootstrap_draws <= 0:
+        parser.error("--batch-size and --bootstrap-draws must be positive")
 
     from transformers import CLIPModel, CLIPProcessor
     import transformers

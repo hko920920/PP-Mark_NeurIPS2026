@@ -65,7 +65,7 @@ fixture key as a producer key.
 
 `host/examples/timing_campaign.rs` records setup, execution, proving and
 verification separately; `host/examples/cycle_compare.rs` contains historical
-v1/v2 comparisons. Build an example with `cargo build --release --manifest-path
+v1/v2 comparisons. Build an example with `cargo build --locked --release --manifest-path
 sp1/Cargo.toml -p sp1-genguard-host --example timing_campaign --features cuda`.
 Use the explicit arguments documented in [the reproduction guide](../docs/REPRODUCE.md).
 Report proof mode, hardware, SDK and whether setup is included with timing results.

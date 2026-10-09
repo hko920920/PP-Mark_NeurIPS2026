@@ -13,6 +13,10 @@ fi
 OUT="$1"
 QUALITY="$2"
 GPU_COUNT="${3:-2}"
+if [[ "$GPU_COUNT" != "2" ]]; then
+  printf 'The prepared manifests contain exactly two shards; GPU_COUNT must be 2. Use the combined manifest for a single GPU.\n' >&2
+  exit 2
+fi
 PYTHON="${PPMARK_PYTHON:-python}"
 TAU="2.4665623073926706"
 
@@ -38,6 +42,8 @@ run_shard() {
 }
 
 test -f "$OUT/PREPARED"
+test -s "$OUT/manifest_q${QUALITY}_gpu0.jsonl"
+test -s "$OUT/manifest_q${QUALITY}_gpu1.jsonl"
 
 pids=()
 inputs=()

@@ -2,7 +2,7 @@
 name = "sp1-genguard-host"
 version = "0.1.0"
 edition = "2021"
-license = "MIT OR Apache-2.0"
+license.workspace = true
 publish = false
 
 [dependencies]
@@ -17,7 +17,7 @@ sha2 = "0.10"
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 
 [build-dependencies]
-sp1-build = "6.3.1"
+sp1-build = "=6.3.1"
 
 [features]
 default = []

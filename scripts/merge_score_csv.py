@@ -27,8 +27,14 @@ def main() -> None:
                 raise RuntimeError(f"Schema mismatch: {raw}")
             rows.extend(reader)
 
-    if fieldnames is None:
+    if fieldnames is None or not rows:
         raise RuntimeError("No input rows")
+    seen: set[tuple[int, str, str, str]] = set()
+    for row in rows:
+        key = (int(row["idx"]), row["label"], row["attack"], row["strength"])
+        if key in seen:
+            raise ValueError(f"Duplicate evaluation row across shards: {key}")
+        seen.add(key)
     rows.sort(key=lambda row: (int(row["idx"]), row["label"]))
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)

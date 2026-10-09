@@ -571,7 +571,7 @@ def _proof_meta_missing(meta: dict, backend: str) -> bool:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Evaluate attack results from a manifest.")
     parser.add_argument("--manifest", required=True, help="JSONL manifest with image_path/metadata_path.")
-    parser.add_argument("--config", default="config.json")
+    parser.add_argument("--config", default="config_alpha4_k1000.json")
     parser.add_argument("--metadata-path", help="Default metadata path if row lacks metadata_path.")
     parser.add_argument("--image-root", default="", help="Override root for relative image_path.")
     parser.add_argument("--metadata-root", default="", help="Override root for relative metadata_path.")
@@ -594,7 +594,7 @@ def main() -> None:
     parser.add_argument("--crop-refine-step", type=float, default=0.05)
     parser.add_argument("--skip-decode", action="store_true")
     parser.add_argument("--skip-consistency", action="store_true")
-    parser.add_argument("--verify-proof", action="store_true")
+    parser.add_argument("--verify-proof", action="store_true", help="Retired option; use the main CLI's verifier --mode attest.")
     parser.add_argument(
         "--opening-mode",
         default="strict",
@@ -608,6 +608,8 @@ def main() -> None:
         help="Tolerance for robust opening checks (latent units).",
     )
     args = parser.parse_args()
+    if args.verify_proof:
+        parser.error("This harness evaluates Score only. Use ppmark verifier --mode attest with a trusted producer commitment for Accept.")
 
     cfg = GlobalConfig.load(Path(args.config))
     manifest_path = Path(args.manifest)
@@ -621,6 +623,8 @@ def main() -> None:
         payload = _load_json(Path(args.tau_file))
         tau = float(payload.get("tau_score"))
     tau = float(tau) if tau is not None else float("nan")
+    if not np.isfinite(tau):
+        parser.error("Supply a finite detection threshold through --tau or --tau-file")
 
     inverse_cdf = InverseCDFTable.from_file(cfg.tables.inverse_cdf_path)
     codec = ReedSolomonCodec(n=cfg.watermark.rs_n, k=cfg.watermark.rs_k)

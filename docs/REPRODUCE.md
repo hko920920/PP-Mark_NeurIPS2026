@@ -64,7 +64,8 @@ python scripts/generate_quality_images.py \
 ```
 
 This helper writes images only. Use the main CLI when metadata and receipts
-are needed. Obtain comparison implementations from the [model guide](MODELS.md).
+are needed. Watermarked images use the current prover's fixed-point embedding
+channel. Obtain comparison implementations from the [model guide](MODELS.md).
 
 Create `outputs/quality_inputs/methods.json` with manifest paths relative to it:
 
@@ -93,8 +94,9 @@ and 100 splits; adjust `--expected-count`, `--kid-subset-size` and `--kid-splits
 together for another dataset size. KID needs at least two samples per subset.
 Slightly negative unbiased KID estimates can occur with finite samples.
 
-`eval_ppmark_quality_full1000.py` accepts the same `--methods-file` interface
-and expects 1,000 matched clean/PP-Mark pairs for its fixed-size evaluation.
+For a 1,000-pair clean/PP-Mark collection, use the same evaluator with
+`--expected-count 1000 --kid-subset-size 500 --kid-splits 20 --seed 2025`.
+Choose a separate output directory for each collection.
 
 ## Signature controls
 
@@ -163,7 +165,7 @@ its indices in the preparation command. JPEG uses quality 25 and 4:2:0 subsampli
 Use the build and fixture preparation in [sp1/README.md](../sp1/README.md).
 
 ```bash
-CC="${CC:-gcc}" CXX="${CXX:-g++}" CARGO_TARGET_DIR="$PWD/target/sp1" cargo build --release \
+CC="${CC:-gcc}" CXX="${CXX:-g++}" CARGO_TARGET_DIR="$PWD/target/sp1" cargo build --locked --release \
   --manifest-path sp1/Cargo.toml -p sp1-genguard-host \
   --example timing_campaign --features cuda
 

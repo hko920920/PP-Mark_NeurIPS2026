@@ -24,7 +24,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-evaluation = ["cryptography>=41", "pyiqa==0.1.16", "matplotlib>=3.7"]
+evaluation = ["cryptography>=41", "pyiqa==0.1.16"]
 dev = ["pytest>=8"]
 
 [project.scripts]

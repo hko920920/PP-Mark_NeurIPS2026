@@ -496,7 +496,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="Matched BRISQUE and KID evaluation for the NeurIPS 2026 PP-Mark rebuttal."
     )
-    parser.add_argument("--output", default="outputs/rebuttal_quality_baselines_n100")
+    parser.add_argument("--output", default="outputs/quality")
     parser.add_argument("--methods-file", type=Path, required=True, help="JSON method list with paths relative to that file")
     parser.add_argument("--expected-count", type=int, default=100)
     parser.add_argument("--device", default="cuda")
@@ -511,6 +511,10 @@ def main() -> None:
         help="Reuse a complete brisque_summary.json in the output directory.",
     )
     args = parser.parse_args()
+    if args.expected_count < 2 or not 2 <= args.kid_subset_size <= args.expected_count:
+        parser.error("Require 2 <= --kid-subset-size <= --expected-count")
+    if min(args.batch_size, args.kid_splits, args.bootstrap_draws) <= 0:
+        parser.error("--batch-size, --kid-splits and --bootstrap-draws must be positive")
     methods = load_method_specs(args.methods_file)
 
     random.seed(args.seed)

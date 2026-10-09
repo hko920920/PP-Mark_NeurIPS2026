@@ -13,6 +13,7 @@ import numpy as np
 import torch
 from PIL import Image
 
+from ppmark_v03.attestation import alpha_fixed_and_scale_q30, canonicalize_scaled_channel
 from ppmark_v03.config import GlobalConfig
 from ppmark_v03.embedding import inject_watermark
 from ppmark_v03.payload import bytes_to_bits, int_to_fixed_bytes, make_ctx_hash
@@ -164,7 +165,11 @@ def main() -> None:
         rows = rows[: args.max_images]
 
     cfg = GlobalConfig.load(Path(args.config))
+    if cfg.zk.sample_backend != "sha256" or (cfg.watermark.rs_n, cfg.watermark.rs_k) != (64, 32):
+        raise ValueError("Use the current SHA-256 / RS(64,32) configuration")
     inverse_cdf = InverseCDFTable.from_file(cfg.tables.inverse_cdf_path)
+    if inverse_cdf.size != 65_536:
+        raise ValueError("The current embedding requires the 65,536-entry inverse-CDF LUT")
     codec = ReedSolomonCodec(n=cfg.watermark.rs_n, k=cfg.watermark.rs_k)
     secret_bytes = _load_secret(args)
 
@@ -175,6 +180,8 @@ def main() -> None:
         prompt = str(row["prompt_text"])
         seed = int(row["seed"])
         alpha = float(row["alpha"])
+        if not np.isfinite(alpha) or alpha < 0:
+            raise ValueError("alpha must be finite and non-negative")
         rel_path = Path(row["image_path"])
         out_path = out_root / rel_path
         if out_path.exists() and not args.overwrite:
@@ -218,11 +225,20 @@ def main() -> None:
             inverse_cdf=inverse_cdf,
             sample_set=sample_set,
         )
-        scale_factor = 1.0 / float(np.sqrt(1.0 + alpha * alpha))
-        latent_scaled = embedding.latent_noise.astype(np.float32) * scale_factor
+        alpha_fixed, scale_q30, _, scale_factor = alpha_fixed_and_scale_q30(alpha)
+        latent_scaled = (embedding.latent_noise.astype(np.float32) * scale_factor).astype(np.float32)
+        if alpha > 0:
+            # Use the same fixed-point channel as the current SP1 image prover.
+            _, canonical_ch0 = canonicalize_scaled_channel(
+                embedding.noise_artifacts.gaussian,
+                embedding.noise_artifacts.spread,
+                scale_factor_q30=scale_q30,
+                alpha_effective_fixed=alpha_fixed,
+            )
+            latent_scaled[0] = canonical_ch0.reshape(cfg.image.height, cfg.image.width)
         torch_latents = torch.from_numpy(latent_scaled[None, ...]).to(device=args.device, dtype=pipe.dtype)
         gen = torch.Generator(device=args.device)
-        gen.manual_seed(seed)
+        gen.manual_seed(seed % (2**63 - 1))
         result = pipe(
             prompt=prompt,
             negative_prompt=negative_prompt,

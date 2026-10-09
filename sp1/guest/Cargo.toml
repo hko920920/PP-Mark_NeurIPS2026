@@ -2,6 +2,7 @@
 name = "sp1-genguard-guest"
 version = "0.1.0"
 edition = "2021"
+license.workspace = true
 publish = false
 
 [[bin]]
@@ -13,7 +14,7 @@ name = "sp1-genguard-streaming"
 path = "src/bin/streaming.rs"
 
 [dependencies]
-sp1-zkvm = "6.3.1"
+sp1-zkvm = "=6.3.1"
 sha2 = "0.10.9"
 serde = { version = "1.0", features = ["derive"] }
 

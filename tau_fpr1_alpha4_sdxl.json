@@ -1,0 +1,12 @@
+{
+  "tau_score": 2.4666,
+  "fpr_target": 0.01,
+  "source": "Frozen threshold used for the reported SDXL results (paper reports tau = 2.47); see docs/REPRODUCE.md.",
+  "alpha": 4.0,
+  "sample_count": 1000,
+  "model_family": "SDXL",
+  "latent_resolution": [128, 128],
+  "inversion_dtype": "bfloat16",
+  "inversion_steps": 50,
+  "note": "Historical reference threshold, not recalibrated for this release. SDXL inversion requires bfloat16; float16 silently collapses the recovered latent to zero. Use the documented matching evaluation conditions; calibrate separately with scripts/calibrate_threshold.py when they change."
+}

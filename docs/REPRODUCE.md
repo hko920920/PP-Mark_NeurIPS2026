@@ -36,6 +36,92 @@ the public metadata for its corresponding original. Give each condition an
 `attack` label. This is the statistical evaluation harness; use the README's
 `verifier --mode attest` command for authenticated Accept verification.
 
+## Generating transformed images
+
+`apply_transforms.py` produces the transformed collections for the
+post-transformation detection results. It takes a manifest of original
+watermarked images, writes one subdirectory per image, and emits a separate
+manifest per transform in the schema above, carrying each original's public
+metadata forward unchanged.
+
+```bash
+python scripts/apply_transforms.py \
+  --manifest outputs/quality_inputs/pp_mark/manifest.jsonl \
+  --output-root outputs/transforms \
+  --metadata-root . \
+  --transforms clean,jpeg_q25,blur_8x8,noise_sigma_0.1,brightness_jitter_0_6,crop_scale_0.75,rot_75
+```
+
+The reported parameters are the defaults: JPEG `q=25` with 4:2:0 subsampling,
+box blur with an 8-pixel kernel, additive Gaussian noise `sigma=0.1`,
+brightness jitter of half-width `0.6` (a uniform factor on `[0.4, 1.6]`),
+random crop retaining 75% of the area resized back with bicubic
+interpolation, and rotation by 75 degrees. `--transforms all` adds `jpeg_q75`,
+`resize_0.75` and a `chained` condition that applies JPEG, crop-resize,
+rotation, blur, noise and brightness in that order. Random draws use fixed
+per-transform generators, so repeated runs over the same inputs are identical;
+`transform_settings.json`, `crop_boxes.json` and `brightness_factors.json`
+record the settings and the realised draws.
+
+Score each manifest with `eval_attack_manifest.py` under the reference
+inversion settings. Geometric conditions need their alignment search enabled:
+
+```bash
+python scripts/eval_attack_manifest.py \
+  --manifest outputs/transforms/manifest_rot_75.jsonl \
+  --config config_alpha4_k1000.json --tau-file tau_fpr1_alpha4_sd21.json \
+  --image-root outputs/transforms --metadata-root . \
+  --ddim-device cuda --ddim-dtype float32 --ddim-steps 100 \
+  --max-rotation 75 --rotation-step 1 --rotation-strategy coarse_to_fine \
+  --skip-decode --skip-consistency \
+  --scores-out outputs/transforms/eval_rot_75/scores.csv \
+  --summary-out outputs/transforms/eval_rot_75/summary.json
+```
+
+Crop conditions use `--max-shift 16 --crop-keep-ratio 0.75 --crop-grid 9
+--crop-refine --crop-refine-grid 9 --crop-refine-step 0.03` instead. Pixel-only
+conditions (JPEG, blur, noise, brightness) need no alignment flags. The
+detection rate for a condition is the `score_pass` fraction in its summary.
+
+## Threshold calibration
+
+The thresholds at the repository root are frozen constants from the reported
+evaluation, and their original negative collections are not redistributed.
+`calibrate_threshold.py` reproduces the calibration procedure so a threshold
+can be derived for a new model or new evaluation conditions.
+
+Generate a clean (non-watermarked) collection, score it against watermark
+metadata so each row yields a false-positive score, then take the quantile:
+
+```bash
+python scripts/eval_attack_manifest.py \
+  --manifest outputs/calibration/manifest.jsonl \
+  --config config_alpha4_k1000.json --tau 0 \
+  --ddim-device cuda --ddim-dtype float32 --ddim-steps 100 \
+  --skip-decode --skip-consistency \
+  --scores-out outputs/calibration/scores.csv \
+  --summary-out outputs/calibration/summary.json
+
+python scripts/calibrate_threshold.py \
+  --scores outputs/calibration/scores.csv \
+  --output outputs/calibration/tau_fpr1.json \
+  --fpr 0.01 --model-family SD2.1 --alpha 4.0 --sample-count 1000 \
+  --inversion-dtype float32 --inversion-steps 100
+```
+
+The default `percentile` estimator takes the `(1 - fpr)` quantile with linear
+interpolation; `--estimator kth-largest` takes the `round(fpr * n)`-th largest
+score, which is more conservative on small collections. Record the model, alpha,
+sample count and inversion settings with any threshold, and never reuse a
+threshold across different inversion settings. `datasets/calibration_recipe.json`
+records how the reported prompt collections were selected from the public
+prompt dataset, so equivalent collections can be rebuilt.
+
+Two thresholds are provided: `tau_fpr1_alpha4_sd21.json` for SD2.1 under FP32
+DDIM-100 inversion, and `tau_fpr1_alpha4_sdxl.json` for SDXL. SDXL inversion
+must run in `bfloat16`; `float16` silently collapses the recovered latent to
+zero and produces meaningless scores.
+
 ## BRISQUE, KID and CLIP
 
 Prepare a JSONL manifest for each method. For example, a clean-image row is:
@@ -115,6 +201,54 @@ and over the image hash, context hash and binding (Context-Sig). It checks
 original verification, cross-image replay, context substitution, signer-authorized
 clean images and post-signing transforms. PP-Mark Score/Accept decisions are
 obtained with the PP-Mark verifier separately.
+
+## White-box forgery attack
+
+`attack_whitebox_forge.py` runs the white-box PGD forgery attack against the
+Score detector. The adversary is given the detector, its gradients, a cover
+image and the public metadata of the claim being forged, and maximises the
+Score statistic under an l-infinity budget. Acceptance is evaluated under the
+any-step criterion: an image counts as accepted if its score reaches the
+threshold at any optimization step, and the reported PSNR for an accepted image
+is measured at its first-breach step.
+
+```bash
+bash scripts/run_wb_pgd_ppmark.sh \
+  outputs/quality_inputs/pp_mark/manifest.jsonl \
+  outputs/attacks/wb_pgd_sd21 sd21 150 100
+```
+
+The wrapper selects the configuration, threshold, model id and inversion dtype
+for `sd21` or `sdxl` and applies the reported settings (`eps = 2/255`,
+150 steps). Call the script directly for other budgets:
+
+```bash
+python scripts/attack_whitebox_forge.py \
+  --manifest outputs/quality_inputs/pp_mark/manifest.jsonl \
+  --output-root outputs/attacks/wb_pgd_sd21 \
+  --config config_alpha4_k1000.json \
+  --threshold-file tau_fpr1_alpha4_sd21.json \
+  --metadata-root . \
+  --ddim-device cuda --ddim-dtype float32 --ddim-steps 50 \
+  --steps 150 --eps 0.00784313725490196 \
+  --max-images 100 --trace-all
+```
+
+`summary.json` reports `far_any_step`, `avg_steps_to_fa` and `psnr_mean`;
+`metrics.csv` carries the per-image `breach_step`, `score_max` and PSNR, and
+`trace_scores.csv` the per-step score and PSNR trajectories used for the
+cumulative FAR curves. Completed images are skipped unless `--overwrite` is
+given, so a long run is restart-safe.
+
+Gradients flow through DDIM inversion, so the cost is dominated by inversion
+and a 100-image run takes hours to days on one GPU. On SDXL pass
+`--ddim-dtype bfloat16` with `--ddim-grad-checkpointing` and
+`--ddim-vae-slicing`; `float16` is unusable for inversion.
+
+This attack targets Score only. It cannot produce an SP1 receipt, so a forged
+image fails Accept verification whatever its Score. Confirm this by running the
+main verifier in `attest` mode on a forged output, which is the separation the
+two assurance levels are meant to provide.
 
 ## Sequential crop-resize-JPEG evaluation
 

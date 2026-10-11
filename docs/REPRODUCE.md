@@ -270,6 +270,18 @@ public metadata. Under a directory such as `outputs/sequential_inputs/`, supply:
   `[left, top, right, bottom]` crop coordinates;
 - `eval_crop_full100_maxlevers/scores.csv`, computed on those crop images.
 
+`apply_transforms.py` produces the first three directly: run it with
+`--transforms crop_scale_0.75` and use its output directory as the crop root.
+Its `crop_boxes.json` already uses the `img_000` keys expected here, and its
+crop images sit at the relative paths its manifest records. Two names differ
+from what this stage reads, so rename its manifest to `manifest_crop.jsonl` and
+write the crop scores to `eval_crop_full100_maxlevers/scores.csv`:
+
+```bash
+cp outputs/transforms/manifest_crop_scale_0.75.jsonl \
+   outputs/sequential_inputs/manifest_crop.jsonl
+```
+
 Compute crop checkpoint scores with `eval_attack_manifest.py`, adding:
 
 ```text
@@ -301,6 +313,16 @@ Persistent detection requires passing both checkpoints with the same threshold.
 The helper joins by `idx` and requires the same complete set at both checkpoints.
 For another sample count, specify that count with `--expected-count` and list
 its indices in the preparation command. JPEG uses quality 25 and 4:2:0 subsampling.
+
+`run_rebuttal_existing_crop_recompression_multigpu.sh` runs the JPEG checkpoint
+across two GPUs using the sharded manifests the preparation step writes, and
+merges the shards with `merge_score_csv.py`. It carries the frozen SD2.1
+threshold inline, so use it only under the matching evaluation conditions:
+
+```bash
+bash scripts/run_rebuttal_existing_crop_recompression_multigpu.sh \
+  outputs/sequential 25 2
+```
 
 ## SP1 timing
 

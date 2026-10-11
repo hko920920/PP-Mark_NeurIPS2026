@@ -61,6 +61,20 @@ The standard Python prover deletes its serialized witness after a successful
 proof unless private-debug retention is requested. Never use the diagnostic
 fixture key as a producer key.
 
+`scripts/test_sp1_attest_tamper.sh` exercises the negative cases against a
+built host. It takes no arguments: for each of ten tampered inputs, covering
+P1 binding and key, P2 root and index set, P3 image and opening digest, and P4
+codeword, bit, Gaussian value and LUT, it builds a fixture with that single
+field altered and requires the guest to reject it. Every case must print
+`REJECTED`; an `UNEXPECTED_ACCEPT` line fails the run.
+
+```bash
+bash scripts/test_sp1_attest_tamper.sh
+```
+
+Point `PPMARK_SP1_HOST` at the host binary if it is not at
+`target/sp1/release/sp1-genguard-host`.
+
 ## Timing
 
 `host/examples/timing_campaign.rs` records setup, execution, proving and

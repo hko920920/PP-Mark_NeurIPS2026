@@ -30,7 +30,8 @@ checkpoints/
 *.npy
 *.npz
 data/
-datasets/
+datasets/*
+!datasets/calibration_recipe.json
 results/
 
 # Producer-only material and local credentials

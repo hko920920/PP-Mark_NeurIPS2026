@@ -120,24 +120,35 @@ Keep producer keys and prover witnesses private. The default successful prover
 removes the serialized witness; `--skip-proof` and debug retention leave private
 artifacts and do not provide an accepted proof.
 
-The supplied threshold is the frozen SD2.1 paper/rebuttal reference value, not a
-fresh calibration of this release. Preserve the documented evaluation conditions
-for comparisons. New model/configuration combinations need their own calibration.
-An SDXL configuration is included as `config_alpha4_k1000_sdxl.json`.
+The supplied thresholds are the frozen paper/rebuttal reference values, not a
+fresh calibration of this release: `tau_fpr1_alpha4_sd21.json` for SD2.1 and
+`tau_fpr1_alpha4_sdxl.json` for SDXL. Preserve the documented evaluation
+conditions for comparisons. New model/configuration combinations need their own
+calibration; `scripts/calibrate_threshold.py` derives one from clean-image
+scores at a target FPR, and `datasets/calibration_recipe.json` records how the
+reported prompt collections were selected. An SDXL configuration is included as
+`config_alpha4_k1000_sdxl.json`; SDXL inversion requires `bfloat16`, because
+`float16` silently collapses the recovered latent to zero.
 
 ## Experiments
 
 The [evaluation guide](docs/REPRODUCE.md) describes input formats and commands for:
 
 - claim-conditioned detection and transformation evaluation;
+- generation of the transformed collections, and threshold calibration;
 - sequential crop–resize–JPEG evaluation;
 - Bare-Sig and Context-Sig controls;
+- the white-box PGD forgery attack against Score;
 - BRISQUE, KID, and CLIP comparisons;
 - SP1 proving/verification timing.
 
 Generate images with the provided code or supply your own evaluation collection.
 The tools accept image/metadata paths through JSONL manifests. Pretrained model
 weights are downloaded separately as described in the model guide.
+
+The forgery attack targets the Score statistic only. It cannot produce an SP1
+receipt, so a forged image fails Accept verification whatever its Score; the
+evaluation guide shows how to confirm that separation on the attack's output.
 
 ## Citation
 

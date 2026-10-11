@@ -1,0 +1,42 @@
+{
+  "description": "Prompt-set construction recipes for the reported evaluations. The prompt texts are not redistributed; they are selected deterministically from the named public dataset with the recorded seed, so the same collections can be rebuilt.",
+  "prompt_source": {
+    "dataset_id": "Gustavosta/Stable-Diffusion-Prompts",
+    "dataset_split": "train",
+    "prompt_key": "Prompt",
+    "license": "see the dataset card on Hugging Face"
+  },
+  "collections": {
+    "negative_calibration_sd21": {
+      "purpose": "Clean (non-watermarked) scores for Score threshold calibration at FPR = 1%.",
+      "prompt_filter": "simple",
+      "prompts_seed": 2025,
+      "prompt_count": 50,
+      "images_per_prompt": 20,
+      "total_images": 1000,
+      "seeds": "sequential integers per prompt, starting at 0",
+      "model": "stabilityai/stable-diffusion-2-1-base",
+      "guidance_scale": 7.5,
+      "alpha": 0.0,
+      "note": "Each clean image is paired with watermark metadata in the evaluation manifest, so the recorded score is a false-positive score."
+    },
+    "quality_prompts_sd21_100": {
+      "purpose": "Matched clean/watermarked pairs for BRISQUE, KID and CLIP comparison.",
+      "prompts_seed": 2025,
+      "prompt_count": 100,
+      "seeds": "one 32-bit seed per prompt, drawn with the recorded prompts_seed",
+      "model": "stabilityai/stable-diffusion-2-1-base",
+      "guidance_scale": 7.5,
+      "alpha_clean": 0.0,
+      "alpha_watermarked": 4.0
+    }
+  },
+  "procedure": [
+    "Load the dataset split and apply the recorded prompt filter.",
+    "Select prompt_count prompts deterministically using prompts_seed.",
+    "Generate images with the recorded model, guidance scale and seeds (scripts/generate_quality_images.py for image-only collections, the main CLI when metadata and receipts are needed).",
+    "Score with scripts/eval_attack_manifest.py under the inversion settings recorded in the threshold file.",
+    "Derive the threshold with scripts/calibrate_threshold.py."
+  ],
+  "note": "The frozen thresholds at the repository root are preserved constants from the reported evaluation; their original negative collections are not redistributed, so a fresh calibration will not reproduce those exact values."
+}

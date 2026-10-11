@@ -136,6 +136,14 @@ An example PP-Mark row with public metadata is:
 {"idx":0,"prompt_id":0,"seed":1,"prompt_text":"A red bicycle beside a stone wall","image_path":"images/item_0000/watermarked.png","metadata_path":"images/item_0000/metadata.json","alpha":4.0}
 ```
 
+The prompt and seed of every item in the reported 100-pair comparison are listed
+in `datasets/prompt_seed_pairs_sd21_100.jsonl`, one object per line with
+`prompt_id`, `seed` and `prompt_text`. The clean and PP-Mark collections use the
+same 100 pairs and differ only in `alpha`, so that file is the input list for
+both; `datasets/calibration_recipe.json` records the matching generation
+settings. Supply your own list in the same format to evaluate another
+collection.
+
 Create complete matched collections; the commands below expect 100 pairs.
 Image/metadata paths are relative to each manifest. Generate PP-Mark artifacts
 with the main CLI, encoding integer seeds as 32-byte, zero-padded `--seed-hex`

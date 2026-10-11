@@ -32,6 +32,7 @@ checkpoints/
 data/
 datasets/*
 !datasets/calibration_recipe.json
+!datasets/prompt_seed_pairs_sd21_100.jsonl
 results/
 
 # Producer-only material and local credentials

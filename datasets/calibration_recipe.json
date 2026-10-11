@@ -1,5 +1,5 @@
 {
-  "description": "Prompt-set construction recipes for the reported evaluations. The prompt texts are not redistributed; they are selected deterministically from the named public dataset with the recorded seed, so the same collections can be rebuilt.",
+  "description": "Prompt and seed records for the reported evaluations. The 100 quality-comparison pairs are listed explicitly in datasets/prompt_seed_pairs_sd21_100.jsonl. The larger threshold-calibration collection is described by its construction recipe instead, so an equivalent set can be rebuilt from the named public dataset with the recorded seed.",
   "prompt_source": {
     "dataset_id": "Gustavosta/Stable-Diffusion-Prompts",
     "dataset_split": "train",
@@ -20,15 +20,16 @@
       "alpha": 0.0,
       "note": "Each clean image is paired with watermark metadata in the evaluation manifest, so the recorded score is a false-positive score."
     },
-    "quality_prompts_sd21_100": {
+    "quality_pairs_sd21_100": {
       "purpose": "Matched clean/watermarked pairs for BRISQUE, KID and CLIP comparison.",
-      "prompts_seed": 2025,
+      "prompt_seed_list": "datasets/prompt_seed_pairs_sd21_100.jsonl",
       "prompt_count": 100,
-      "seeds": "one 32-bit seed per prompt, drawn with the recorded prompts_seed",
       "model": "stabilityai/stable-diffusion-2-1-base",
       "guidance_scale": 7.5,
+      "generation_steps": 50,
       "alpha_clean": 0.0,
-      "alpha_watermarked": 4.0
+      "alpha_watermarked": 4.0,
+      "note": "The prompt and seed used for every item are listed explicitly in the referenced file, one JSON object per line with prompt_id, seed and prompt_text. The clean and watermarked collections use the same 100 pairs and differ only in alpha. Encode each integer seed as a 32-byte zero-padded --seed-hex value for the main CLI."
     }
   },
   "procedure": [

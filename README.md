@@ -151,6 +151,7 @@ weights are downloaded separately as described in the model guide.
 The forgery attack targets the Score statistic only. It cannot produce an SP1
 receipt, so a forged image fails Accept verification whatever its Score; the
 evaluation guide shows how to confirm that separation on the attack's output.
+[Additional Model Generalization After Camera ready !! ]
 <img width="2014" height="1131" alt="Additional Model Generalization_PPmark" src="https://github.com/user-attachments/assets/d45c9522-88a4-47f1-b8e0-2e4dcda465b8" />
 
 

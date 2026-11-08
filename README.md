@@ -16,6 +16,8 @@ SP1 v6.3.1 streaming-v2 path. The Python import name remains `ppmark_v03` for
 compatibility. See [implementation](docs/architecture.md),
 [evaluation instructions](docs/REPRODUCE.md), and
 [external models](docs/MODELS.md).
+<img width="1591" height="890" alt="Additional Method_PPmark" src="https://github.com/user-attachments/assets/928323a1-9ce4-42ce-863f-a44ef5996943" />
+
 
 ## Install
 
